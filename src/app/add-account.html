@@ -1,0 +1,61 @@
+<div class="col col-md-4 col-centered">
+<form [formGroup]="myForm" class="">
+    <div *ngIf="accNum.invalid && (accNum.dirty || accNum.touched)" class="alert alert-danger">Account number is required</div>
+    <div class="form-group">
+        <label for="accNum">Account Number</label>
+        <input type="number" name="accNum" formControlName="accNum" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="bankName">Bank Name</label>
+        <input type="text" name="bankName" formControlName="bankName" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="principalAmt">Deposit Amount</label>
+        <input type="number" name="principalAmt" formControlName="principalAmt" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="startDate">Deposit Start Date</label>
+        <input type="date" name="startDate" formControlName="startDate" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="noOfMonths">Deposit Period in Months</label>
+        <input type="number" name="noOfMonths" formControlName="noOfMonths" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="roi">Interest Rate</label>
+        <input type="number" name="roi" formControlName="roi" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="endDate">Maturity Date</label>
+        <input type="date" name="endDate" formControlName="endDate" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="maturityAmt">Maturity Amount</label>
+        <input type="number" name="maturityAmt" formControlName="maturityAmt" class="form-control">
+    </div>
+    <div class="form-group">    
+        <label for="repayAccount">Repayment Account Number</label>
+        <input type="number" name="repayAccount" formControlName="repayAccount" class="form-control">
+    </div>
+    <div class="form-group">    
+        <label for="accountHolder">Account Holder</label>
+        <input type="text" name="accountHolder" formControlName="accountHolder" class="form-control">
+    </div>
+    <button type="button" (click)="addAccount(myForm.value)" class="btn btn-success">Add Account</button>
+</form>
+</div>
+<!--Start of Modal-->
+<ng-template #addedSuccessfullyModaltemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Added successfully!</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Account number : {{account.accNum}} added successfully! Do you wish to add another one? </p>
+	<button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+  </div>
+</ng-template>
+<!--End of Modal-->

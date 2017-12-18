@@ -1,0 +1,8 @@
+<h2>Edit Details</h2>
+<form *ngIf="accounts">
+	<label for="accountNum"></label>
+	<input type="text" id="accountNum" [(ngModel)]="accounts.iddeposits" name="accountNum"/>
+	<label for="bankName"></label>
+	<input type="text" id="bankName" [(ngModel)]="accounts.bankName" name="bankName"/>
+	<button type="submit" (click)="saveDetails()">Save</button>
+</form>
