@@ -1,19 +1,22 @@
- import {Component,OnInit,TemplateRef} from '@angular/core';
+ import {Component,OnInit,TemplateRef,ViewChild} from '@angular/core';
  import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
  import {AccountDetailsService} from './account-details.service';
  import {Accounts} from './accounts';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {Router} from '@angular/router';
  @Component({
     selector: 'add-account',
     templateUrl: './add-account.html',
     providers:[AccountDetailsService]
  })
  export class AddAccountComponent{
+     @ViewChild('addedSuccessfullyModaltemplate') addModal : TemplateRef<any>;
     //myForm: FormGroup;
     account : Accounts;
     bankName : String;
-    constructor(public fb: FormBuilder,private accountService : AccountDetailsService,private modalService: BsModalService){};
+    
+    constructor(public fb: FormBuilder,private accountService : AccountDetailsService,private modalService: BsModalService,public router:Router){};
     //ngOnInit():void{
         /*this.myForm = this.fb.group({
             accNum: ['', Validators.required],
@@ -42,9 +45,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
    // };
     get accNum(){return this.myForm.get('accNum');};
     addAccount(account:Accounts):void{
-        this.accountService.addAccountToDB(account).subscribe(function(this,status:Number){console.log(this);
+        this.accountService.addAccountToDB(account).subscribe((status:Number) => {
             if(status == 200){
-                console.log(this.openModal("addedSuccessfullyModaltemplate"));
+                this.openModal(this.addModal);
             }
     });
 }
@@ -53,9 +56,11 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 		this.modalRef = this.modalService.show(template,{class: 'modal-sm'});
 	}
 	confirm(): void {		
-		this.modalRef.hide();	
+		this.myForm.reset();	
+        this.modalRef.hide();
 	}
 	decline(): void {
 		this.modalRef.hide();
+        this.router.navigate(['/edit-details']);
 	}
  }

@@ -41,7 +41,8 @@
         <label for="accountHolder">Account Holder</label>
         <input type="text" name="accountHolder" formControlName="accountHolder" class="form-control">
     </div>
-    <button type="button" (click)="addAccount(myForm.value)" class="btn btn-success">Add Account</button>
+    <button *ngIf="!updateButton"type="button" (click)="addAccount(myForm.value)" class="btn btn-success">Add Account</button>
+    <button *ngIf="updateButton" type="button" (click)="saveDetails(myForm.value)" class="btn btn-success">Update Account</button>
 </form>
 </div>
 <!--Start of Modal-->
@@ -53,7 +54,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <p>Account number : {{account.accNum}} added successfully! Do you wish to add another one? </p>
+    <p>Account number : {{myForm.value.accNum}} added successfully! Do you wish to add another one? </p>
 	<button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
     <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
   </div>
