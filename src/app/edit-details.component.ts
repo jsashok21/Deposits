@@ -10,8 +10,11 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 	providers:[AccountDetailsService]
 })
 export class EditDetailsComponent implements OnInit{
-	accounts: Accounts[];
+	accounts: Array<any>;
 	selectedAccount:Accounts;
+	column: string = 'endDate';
+	isDesc: boolean = false;
+	direction: number = 1;
 	/*accToBeDeleted : String;*/
 	constructor(
 	private router : Router,
@@ -23,7 +26,22 @@ export class EditDetailsComponent implements OnInit{
 		//$('#edit-table').DataTable();
 	}
 	loadAcc():void{
-		this.editService.getDepositAccountsFromDB().subscribe(accounts=>this.accounts=accounts);
+		this.editService.getDepositAccountsFromDB().subscribe(accounts=>{
+			accounts.forEach(function(account,index){
+				var temp = account.startDate.split("-")
+				account.startDate =	new Date(temp[0],temp[1]-1,temp[2]);
+			});
+			accounts.forEach(function(account,index){
+				var temp = account.endDate.split("-")
+				account.endDate = new Date(temp[0],temp[1]-1,temp[2]);
+			});
+			this.accounts = accounts;			
+		});
+	}
+	sort(property:string):void{
+		this.isDesc = !this.isDesc; //change the direction    
+		this.column = property;
+		this.direction = this.isDesc ? 1 : -1;
 	}
 	setSelectedAccount(account:Accounts): void{
 		

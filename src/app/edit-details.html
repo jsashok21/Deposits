@@ -8,7 +8,7 @@
 		<td>Start Date</td>
 		<td>No.of Mths</td>
 		<td>ROI</td>
-		<td>End Date</td>
+		<td (click)="sort('endDate')">End Date</td>
 		<td>Maturity Amt</td>
 		<td>Repay Acct</td>
 		<td>Acc Holder</td>
@@ -17,14 +17,14 @@
 	</tr>
 </thead>
 <tbody>
-	<tr *ngFor="let account of accounts">		
+	<tr *ngFor="let account of accounts | sortByDate: {property: column, direction: direction}">		
 		<td>{{account.accNum}}</td>
-		<td>{{account.principalAmt}}</td>
-		<td>{{account.startDate}}</td>
+		<td>{{account.principalAmt | currency : 'INR':'true':'5.0-2'}}</td>
+		<td>{{account.startDate | date:"dd-MM-yyyy"}}</td>
 		<td>{{account.noOfMonths}}</td>
 		<td>{{account.roi}}</td>
-		<td>{{account.endDate}}</td>
-		<td>{{account.maturityAmt}}</td>
+		<td>{{account.endDate | date:"dd-MM-yyyy"}}</td>
+		<td>{{account.maturityAmt | currency : 'INR':'true':'5.0-2'}}</td>
 		<td>{{account.repayAccount}}</td>
 		<td>{{account.accountHolder}}</td>
 		<td><button class="btn btn-success" (click)="loadSelectedAccount(account)" name="accountRadio">Edit</button></td>

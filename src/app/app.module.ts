@@ -12,8 +12,7 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {KeysPipe} from './accounts.pipe';
 import { ModalModule } from 'ngx-bootstrap';
-
-
+import {OrderBy} from './orderBy.pipe';
 @NgModule({
   imports:      [ BrowserModule,ReactiveFormsModule,ModalModule.forRoot(),RouterModule.forRoot([
   {
@@ -41,7 +40,7 @@ import { ModalModule } from 'ngx-bootstrap';
 	  pathMatch: 'full'
   }
   ]),FormsModule,HttpModule ],
-  declarations: [ AppComponent,AccountDetailsComponent,DashboardComponent,EditDetailsComponent,EditAccountDetailComponent,AddAccountComponent,KeysPipe],
+  declarations: [ AppComponent,AccountDetailsComponent,DashboardComponent,EditDetailsComponent,EditAccountDetailComponent,AddAccountComponent,KeysPipe,OrderBy],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
