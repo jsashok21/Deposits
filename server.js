@@ -46,8 +46,8 @@ app.get('/getAccountByIdFromDB',function(req,res){
     })
 });
 app.post('/saveEditedAccountInDB',function(req,res){
-    var accountID = req.body.iddeposits;    
-    con.query("UPDATE deposits SET bankName = ? WHERE iddeposits = ?",[req.body.bankName,accountID],function(err,result){
+    var account = req.body;   console.log(account); 
+    con.query("UPDATE deposits SET bankName = ?,principalAmt = ?,startDate = ?,noOfMonths = ?,roi = ?,endDate = ?,maturityAmt = ?,repayAccount = ?,accountHolder = ? WHERE iddeposits = ?",[account.bankName,account.principalAmt,account.startDate,account.noOfMonths,account.roi,account.endDate,account.maturityAmt,account.repayAccount,account.accountHolder,account.iddeposits],function(err,result){
         if(err) throw err;
         res.sendStatus(200);
     })

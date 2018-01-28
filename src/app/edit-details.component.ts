@@ -4,6 +4,7 @@ import {Accounts} from './accounts';
 import {Router} from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import {ActivatedRoute} from "@angular/router";
 @Component({
 	selector: 'edit-details',
 	templateUrl: './edit-details.html',
@@ -15,15 +16,17 @@ export class EditDetailsComponent implements OnInit{
 	column: string = 'endDate';
 	isDesc: boolean = false;
 	direction: number = 1;
-	/*accToBeDeleted : String;*/
+	totalInvst : number;
+	totalSavings : number;	
+	editSuccess=false;
 	constructor(
 	private router : Router,
 	private editService : AccountDetailsService,
-	private modalService: BsModalService
+	private modalService: BsModalService,
+	public route : ActivatedRoute
 	){};	
 	ngOnInit():void{
-		this.loadAcc();
-		//$('#edit-table').DataTable();
+		this.loadAcc();		
 	}
 	loadAcc():void{
 		this.editService.getDepositAccountsFromDB().subscribe(accounts=>{
@@ -35,13 +38,22 @@ export class EditDetailsComponent implements OnInit{
 				var temp = account.endDate.split("-")
 				account.endDate = new Date(temp[0],temp[1]-1,temp[2]);
 			});
-			this.accounts = accounts;			
+			this.accounts = accounts;
+			this.totalInvst = this.getSum("principalAmt");	
+			this.totalSavings = this.getSum("maturityAmt");					
 		});
+	}
+	getSum(col:string) : number {
+		let sum = 0;
+		for(let i = 0; i < this.accounts.length; i++) {
+			sum += this.accounts[i][col];
+		}
+		return sum;
 	}
 	sort(property:string):void{
 		this.isDesc = !this.isDesc; //change the direction    
 		this.column = property;
-		this.direction = this.isDesc ? 1 : -1;
+		this.direction = this.isDesc ? -1 : 1;
 	}
 	setSelectedAccount(account:Accounts): void{
 		

@@ -61,6 +61,6 @@ import {Router} from '@angular/router';
 	}
 	decline(): void {
 		this.modalRef.hide();
-        this.router.navigate(['/edit-details']);
+        this.router.navigate(['/edit-details',{editSuccess:true,skipLocationChange: true}]);
 	}
  }

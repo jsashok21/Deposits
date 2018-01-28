@@ -6,6 +6,7 @@ import {Location} from '@angular/common';
 import {Accounts} from './accounts';
 import {AccountDetailsService} from './account-details.service';
 import 'rxjs/add/operator/toPromise';
+import {Router,NavigationExtras} from '@angular/router';
 
 @Component({
 	selector: 'edit-account-detail',
@@ -18,7 +19,8 @@ export class EditAccountDetailComponent implements OnInit{
 	constructor(
 	private route:ActivatedRoute,
 	private location:Location,
-	private accountsService:AccountDetailsService
+	private accountsService:AccountDetailsService,
+	public router:Router
 	){};
 	ngOnInit(){
 		this.route.params
@@ -37,10 +39,17 @@ export class EditAccountDetailComponent implements OnInit{
 		'endDate': new FormControl('', Validators.required),
 		'maturityAmt': new FormControl('', Validators.required),
 		'repayAccount': new FormControl('', Validators.required),
-		'accountHolder': new FormControl('', Validators.required)
+		'accountHolder': new FormControl('', Validators.required),
+		'iddeposits': new FormControl('')
 	});
 	get accNum(){return this.myForm.get('accNum');};
 	saveDetails(account):void{
 		this.accountsService.saveDetailsInDB(account).subscribe();
+		let navigationExtras: NavigationExtras = {
+            queryParams: {				
+                "editSuccess": true
+            }
+        };
+		this.router.navigate(['/edit-details']);
 	}
 }

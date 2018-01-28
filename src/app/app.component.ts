@@ -9,9 +9,12 @@ import {Component} from '@angular/core';
 	<a routerLink="/edit-details" class="btn btn-primary btn-sm">Edit Account Detail</a>
 	<a routerLink="/add-account" class="btn btn-primary btn-sm">Add Account</a>
 	</nav>
+	<div *ngIf="editSuccess" class="alert alert-success">
+		<strong>Edited Sucessfully!</strong>
+	</div>
 	<router-outlet></router-outlet>
 	`
 })
 export class AppComponent{
-	name = "Jane";
+	name = "Jane";	
 }

@@ -1,4 +1,5 @@
-<h2>Select the account to be edited</h2>
+<p>Total Investment : <span>{{totalInvst | currency : 'INR':'true':'5.0-2'}}</span></p>
+<p>Total : <span>{{totalSavings | currency : 'INR':'true':'5.0-2'}}</span></p>
 <div class="table-responsive">
 <table id="edit-table" class="table table-striped">
 <thead>
@@ -24,7 +25,7 @@
 		<td>{{account.noOfMonths}}</td>
 		<td>{{account.roi}}</td>
 		<td>{{account.endDate | date:"dd-MM-yyyy"}}</td>
-		<td>{{account.maturityAmt | currency : 'INR':'true':'5.0-2'}}</td>
+		<td>{{account.maturityAmt | currency : 'INR':'true':'1.0-2'}}</td>
 		<td>{{account.repayAccount}}</td>
 		<td>{{account.accountHolder}}</td>
 		<td><button class="btn btn-success" (click)="loadSelectedAccount(account)" name="accountRadio">Edit</button></td>
