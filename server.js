@@ -38,6 +38,13 @@ app.post('/saveAccountToDB',function(req,res){
         res.sendStatus(200);
     });
 });
+app.post('/saveRDAccountToDB',function(req,res){
+    var account = req.body;
+    con.query("INSERT INTO rdtable (accNum,bankName,principalAmt,startDate,noOfMonths,roi,endDate,maturityAmt,repayAccount,accountHolder) VALUES (?,?,?,?,?,?,?,?,?,?)",[account.accNum,account.bankName,account.principalAmt,account.startDate,account.noOfMonths,account.roi,account.endDate,account.maturityAmt,account.repayAccount,account.accountHolder],function(err,result){
+        if(err) throw err;
+        res.sendStatus(200);
+    });
+})
 app.get('/getAccountByIdFromDB',function(req,res){
     var accountID = req.query.param1;
     con.query("SELECT * FROM deposits WHERE iddeposits = ?",[accountID],function(err,result){

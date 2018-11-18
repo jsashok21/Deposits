@@ -44,12 +44,13 @@ export class EditAccountDetailComponent implements OnInit{
 	});
 	get accNum(){return this.myForm.get('accNum');};
 	saveDetails(account):void{
-		this.accountsService.saveDetailsInDB(account).subscribe();
-		let navigationExtras: NavigationExtras = {
+		this.accountsService.saveDetailsInDB(account).subscribe((res:Response)=>{
+			let navigationExtras: NavigationExtras = {
             queryParams: {				
                 "editSuccess": true
             }
         };
 		this.router.navigate(['/edit-details']);
+		});		
 	}
 }

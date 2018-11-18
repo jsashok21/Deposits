@@ -15,7 +15,7 @@ import {Router} from '@angular/router';
     //myForm: FormGroup;
     account : Accounts;
     bankName : String;
-    
+    color='#8cc63f'
     constructor(public fb: FormBuilder,private accountService : AccountDetailsService,private modalService: BsModalService,public router:Router){};
     //ngOnInit():void{
         /*this.myForm = this.fb.group({

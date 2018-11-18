@@ -1,0 +1,16 @@
+<div>This is a popup</div>
+<!--Start of Modal-->
+<ng-template #deleteModaltemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirm Delete?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete {{selectedAccount.accNum}}?</p>
+	<button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+  </div>
+</ng-template>
+<!--End of Modal-->
